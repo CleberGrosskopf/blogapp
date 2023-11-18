@@ -15,6 +15,7 @@
     const Categoria = mongoose.model("categorias")
     const passport = require("passport")
     require("./config/auth")(passport)
+    const db = require("./config/db")
 // Configurações
     // Sessão
         app.use(session({
@@ -41,7 +42,7 @@
         app.set('view engine', 'handlebars');
     // Mongoose
         mongoose.Promise = global.Promise;
-        mongoose.connect('mongodb://localhost/blogapp').then(() => {
+        mongoose.connect(db.mongoURI).then(() => {
             console.log("Conectado ao mongo")
         }).catch((err) => {
             console.log("Erro ao se conectar: "+err)
